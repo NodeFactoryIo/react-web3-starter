@@ -8,7 +8,7 @@ const App: FC = () => {
         <Suspense fallback={null}>
             <BrowserRouter>
                 <Switch>
-                    <Route path='/' component={HomePage} />
+                    <Route exact path='/' component={HomePage} />
                 </Switch>
             </BrowserRouter>
         </Suspense>
