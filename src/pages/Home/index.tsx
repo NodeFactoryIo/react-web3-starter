@@ -1,8 +1,7 @@
-import React from 'react';
-import './App.scss';
-import { Logo } from './components/Logo';
+import { Logo } from '../../components/Logo';
+import React, { FC } from 'react';
 
-function App() {
+export const HomePage: FC = () => {
     return (
         <div className='App'>
             <header className='App-header'>
@@ -16,6 +15,4 @@ function App() {
             </header>
         </div>
     );
-}
-
-export default App;
+};
