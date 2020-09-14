@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn install --nonInteractive --frozen-lockfile
+      - run: yarn run lint
+      - run: yarn run lint:types
+      - run: yarn run test
+      - run: yarn run build --if-present
