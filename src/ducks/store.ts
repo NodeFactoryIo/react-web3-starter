@@ -1,9 +1,12 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import reduxSaga from 'redux-saga';
 import rootSaga from './rootSaga';
+import ethersReducers from './ethers/reducers';
 
 // state
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+    ethers: ethersReducers,
+});
 export type RootState = ReturnType<typeof rootReducer>;
 
 // middlewares
