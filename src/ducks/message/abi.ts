@@ -112,7 +112,7 @@ const messageAbi = [
                 type: 'address',
             },
             {
-                indexed: true,
+                indexed: false,
                 name: 'setter',
                 type: 'string',
             },

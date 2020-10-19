@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { connectProvider, getUserInfoInConsole } from '../../ducks/ethers/provider/actions';
 import { getEthersProvider } from '../../ducks/ethers/provider/selectors';
 import { changeMessage } from '../../ducks/message/actions';
-import { getMessage } from '../../ducks/message/selectors';
+import { getMessage, getMessageLog } from '../../ducks/message/selectors';
 
 export const HomePage: FC = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const provider = useSelector(getEthersProvider);
     const message = useSelector(getMessage);
+    const log = useSelector(getMessageLog);
 
     const [inputMessage, setMessage] = useState('');
 
@@ -52,7 +53,7 @@ export const HomePage: FC = () => {
                             />
                             <button
                                 onClick={() => {
-                                    if (message) {
+                                    if (inputMessage) {
                                         dispatch(changeMessage(inputMessage));
                                         setMessage('');
                                     }
@@ -60,6 +61,24 @@ export const HomePage: FC = () => {
                                 Send
                             </button>
                         </div>
+                        <table style={{ width: '100%' }}>
+                            <thead>
+                                <tr>
+                                    <td>From</td>
+                                    <td>Message</td>
+                                    <td>Type</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[...log].reverse().map(({ sender, setter, message }, index) => (
+                                    <tr key={index}>
+                                        <td>{sender}</td>
+                                        <td>{message}</td>
+                                        <td>{setter}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </>
                 )}
             </header>

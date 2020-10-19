@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface LogMessage {
+export interface LogMessage {
     sender: string;
     setter: 'admin' | 'paid' | 'free';
     message: string;
