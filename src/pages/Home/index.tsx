@@ -2,7 +2,7 @@ import { Logo } from '../../components/Logo';
 import React, { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { connectProvider } from '../../ducks/ethers/provider/actions';
+import { connectProvider, getUserInfoInConsole } from '../../ducks/ethers/provider/actions';
 
 export const HomePage: FC = () => {
     const { t } = useTranslation();
@@ -25,6 +25,12 @@ export const HomePage: FC = () => {
                         dispatch(connectProvider());
                     }}>
                     open web3 modal
+                </button>
+                <button
+                    onClick={() => {
+                        dispatch(getUserInfoInConsole());
+                    }}>
+                    get user info in console
                 </button>
             </header>
         </div>

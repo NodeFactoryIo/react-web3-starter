@@ -8,3 +8,5 @@ export const { setProvider, connectProviderFail } = providerSlice.actions;
 export const connectProvider = createAction('@@ethers/provider/connect');
 
 export const connectProviderSuccess = createAction('@@ethers/provider/connect_success');
+
+export const getUserInfoInConsole = createAction('@@ethers/provider/user_info_in_console');
