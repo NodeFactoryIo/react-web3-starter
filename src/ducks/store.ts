@@ -2,10 +2,12 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import reduxSaga from 'redux-saga';
 import rootSaga from './rootSaga';
 import ethersReducers from './ethers/reducers';
+import messageSlice from './message/slice';
 
 // state
 const rootReducer = combineReducers({
     ethers: ethersReducers,
+    message: messageSlice.reducer,
 });
 export type RootState = ReturnType<typeof rootReducer>;
 
