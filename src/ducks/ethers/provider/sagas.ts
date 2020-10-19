@@ -3,7 +3,13 @@ import { providers, utils } from 'ethers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal from 'web3modal';
 
-import { connectProvider, connectProviderFail, getUserInfoInConsole, setProvider } from './actions';
+import {
+    connectProvider,
+    connectProviderFail,
+    connectProviderSuccess,
+    getUserInfoInConsole,
+    setProvider,
+} from './actions';
 import { getEthersProvider } from './selectors';
 
 // example for web3modal
@@ -27,6 +33,8 @@ function* connect() {
 
         const [myAddress, balance]: [string, string] = yield call(getUserBalance);
         console.log('getUserBalance from connect', myAddress, balance);
+
+        yield put(connectProviderSuccess());
     } catch (e) {
         console.error(e);
         yield put(connectProviderFail());
