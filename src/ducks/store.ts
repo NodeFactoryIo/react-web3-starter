@@ -5,7 +5,7 @@ import ethersReducers from './ethers/reducers';
 import messageSlice from './message/slice';
 
 // state
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     ethers: ethersReducers,
     message: messageSlice.reducer,
 });

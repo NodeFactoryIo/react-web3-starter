@@ -5,3 +5,7 @@ export type Await<T> = T extends {
 }
     ? U
     : T;
+
+export type DeepPartial<T> = {
+    [P in keyof T]?: DeepPartial<T[P]>;
+};
