@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { render as rtlRender, RenderOptions, RenderResult } from '@testing-library/react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
