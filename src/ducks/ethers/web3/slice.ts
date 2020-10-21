@@ -5,7 +5,7 @@ export type Web3ProviderState = providers.Web3Provider | null;
 
 const initialState: Web3ProviderState = null as Web3ProviderState;
 
-const providerSlice = createSlice({
+const web3Slice = createSlice({
     name: '@@ethers/web3',
     initialState,
     reducers: {
@@ -14,4 +14,4 @@ const providerSlice = createSlice({
     },
 });
 
-export default providerSlice;
+export default web3Slice;

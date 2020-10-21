@@ -67,8 +67,8 @@ function* getSignerBalancer(): Generator<
     }
 }
 
-function* ethersProviderSagaWatcher(): Generator {
+function* ethersWeb3SagaWatcher(): Generator {
     yield all([takeEvery(connectWeb3Provider, connect), takeEvery(getWeb3UserInfoInConsole, getSignerBalancer)]);
 }
 
-export default ethersProviderSagaWatcher;
+export default ethersWeb3SagaWatcher;

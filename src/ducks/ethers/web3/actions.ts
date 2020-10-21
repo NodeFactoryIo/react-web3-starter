@@ -1,8 +1,8 @@
-import providerSlice from './slice';
+import web3Slice from './slice';
 import { createAction } from '@reduxjs/toolkit';
 
 // re-export actions from slice
-export const { setWeb3Provider, connectWeb3ProviderFail } = providerSlice.actions;
+export const { setWeb3Provider, connectWeb3ProviderFail } = web3Slice.actions;
 
 // custom actions for sagas
 export const connectWeb3Provider = createAction('@@ethers/web3/connect');

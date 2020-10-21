@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import ethersProviderSagaWatcher from './web3/sagas';
+import ethersWeb3SagaWatcher from './web3/sagas';
 
 function* ethersSagas(): Generator {
-    yield all([ethersProviderSagaWatcher()]);
+    yield all([ethersWeb3SagaWatcher()]);
 }
 
 export default ethersSagas;
