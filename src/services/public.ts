@@ -5,5 +5,5 @@ export const publicApi = axios.create({
 });
 
 export default {
-    getPublicData: (id: number): Promise<AxiosResponse> => publicApi.get(''),
+    getPublicData: (): Promise<AxiosResponse> => publicApi.get(''),
 };
