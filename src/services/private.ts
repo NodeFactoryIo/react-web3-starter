@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
+import { TIMEOUT } from './index';
 
 export const privateApi = axios.create({
     baseURL: process.env.REACT_APP_API_BASE_URL + 'private',
+    timeout: TIMEOUT,
 });
 
 export default {
