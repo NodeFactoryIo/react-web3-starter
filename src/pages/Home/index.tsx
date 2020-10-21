@@ -30,14 +30,14 @@ export const HomePage: FC = () => {
                 </a>
                 {!provider && (
                     <button
-                        onClick={() => {
+                        onClick={(): void => {
                             dispatch(connectProvider());
                         }}>
                         open web3 modal
                     </button>
                 )}
                 <button
-                    onClick={() => {
+                    onClick={(): void => {
                         dispatch(getUserInfoInConsole());
                     }}>
                     get user info in console
@@ -48,11 +48,11 @@ export const HomePage: FC = () => {
                         <div>
                             <input
                                 value={inputMessage}
-                                onChange={(e) => setMessage(e.target.value)}
+                                onChange={(e): void => setMessage(e.target.value)}
                                 placeholder='enter new message'
                             />
                             <button
-                                onClick={() => {
+                                onClick={(): void => {
                                     if (inputMessage) {
                                         dispatch(changeMessage(inputMessage));
                                         setMessage('');

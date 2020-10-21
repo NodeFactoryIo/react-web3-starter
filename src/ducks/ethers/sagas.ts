@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 import ethersProviderSagaWatcher from './provider/sagas';
 
-function* ethersSagas() {
+function* ethersSagas(): Generator {
     yield all([ethersProviderSagaWatcher()]);
 }
 

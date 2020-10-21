@@ -6,27 +6,27 @@ export interface LogMessage {
     message: string;
 }
 
-interface Message {
+interface MessageState {
     message: string;
     log: LogMessage[];
 }
 
-const initialState: Message = { message: '', log: [] };
+const initialState: MessageState = { message: '', log: [] };
 
 const messageSlice = createSlice({
     name: 'message',
     initialState,
     reducers: {
-        setMessage: (state, action: PayloadAction<string>) => {
+        setMessage: (state, action: PayloadAction<string>): void => {
             state.message = action.payload;
         },
-        setLogMessages: (state, action: PayloadAction<LogMessage[]>) => {
+        setLogMessages: (state, action: PayloadAction<LogMessage[]>): void => {
             state.log = action.payload;
         },
-        addLogMessage: (state, action: PayloadAction<LogMessage>) => {
+        addLogMessage: (state, action: PayloadAction<LogMessage>): void => {
             state.log.push(action.payload);
         },
-        deleteLogMessage: (state, action: PayloadAction<number>) => {
+        deleteLogMessage: (state, action: PayloadAction<number>): void => {
             if (state.log[action.payload]) {
                 state.log.splice(action.payload, 1);
             }

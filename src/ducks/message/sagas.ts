@@ -1,7 +1,20 @@
-import { all, put, call, select, takeEvery, take, fork } from 'redux-saga/effects';
+import {
+    all,
+    put,
+    call,
+    select,
+    takeEvery,
+    take,
+    fork,
+    SelectEffect,
+    PutEffect,
+    CallEffect,
+    ForkEffect,
+} from 'redux-saga/effects';
+import { EventChannel } from '@redux-saga/core';
 import { addLogMessage, changeMessage, fetchMessage, setLogMessages, setMessage as setStoreMessage } from './actions';
 import { getEthersProvider } from '../ethers/provider/selectors';
-import { Contract, ContractTransaction, utils } from 'ethers';
+import { Contract, ContractReceipt, ContractTransaction, utils } from 'ethers';
 import messageAbi from './abi';
 import { storeContract } from '../ethers/contracts/actions';
 import { connectProviderSuccess } from '../ethers/provider/actions';
@@ -9,11 +22,20 @@ import { getMessageContract } from './selectors';
 import { eventChannel } from 'redux-saga';
 import { LogMessage } from './slice';
 import { Listener } from '@ethersproject/abstract-provider';
+import { ProviderState } from '../ethers/provider/slice';
+import { Await } from '../../types/helpers';
+import { ChannelTakeEffect } from '@redux-saga/core/effects';
 
 // https://goerli.etherscan.io/tx/0x09e3ded6a7448d08731c0133549270a5b8ab3a6e6bdf0b92ee04c38e57ebc7f7
 const ADDRESS = '0xac6415e0423877b45e86cfee84cd379867fb3200';
 
-export function* initContract() {
+type ContractLog = Await<ReturnType<Contract['provider']['getLogs']>>;
+
+export function* initContract(): Generator<
+    SelectEffect | PutEffect | CallEffect | Promise<ContractLog> | ForkEffect,
+    void,
+    ProviderState & ContractLog
+> {
     try {
         const provider = yield select(getEthersProvider);
         const contract = new Contract(ADDRESS, messageAbi, provider.getSigner());
@@ -28,11 +50,13 @@ export function* initContract() {
         const log = yield contract.provider.getLogs({ ...filter, fromBlock: 3602282 });
 
         const decoder = new utils.AbiCoder();
-        const mappedLogs = log.map(({ data, topics }: any) => {
-            const [sender] = decoder.decode(['address'], topics[1]);
-            const [setter, message] = decoder.decode(['string', 'string'], data);
-            return { sender, setter, message };
-        });
+        const mappedLogs = log.map(
+            ({ data, topics }): LogMessage => {
+                const [sender] = decoder.decode(['address'], topics[1]);
+                const [setter, message] = decoder.decode(['string', 'string'], data);
+                return { sender, setter, message };
+            },
+        );
 
         yield put(setLogMessages(mappedLogs));
 
@@ -42,7 +66,13 @@ export function* initContract() {
     }
 }
 
-export function* watchOnMessage(contract: Contract) {
+export function* watchOnMessage(
+    contract: Contract,
+): Generator<
+    EventChannel<LogMessage> | ChannelTakeEffect<LogMessage> | PutEffect,
+    void,
+    EventChannel<LogMessage> & LogMessage
+> {
     const event = yield eventChannel<LogMessage>((emit) => {
         const messageEventListener: Listener = (event) => {
             if (event.event === 'Message') {
@@ -55,7 +85,7 @@ export function* watchOnMessage(contract: Contract) {
         };
         contract.on('*', messageEventListener);
 
-        return () => {
+        return (): void => {
             contract.off('*', messageEventListener);
         };
     });
@@ -70,9 +100,15 @@ export function* watchOnMessage(contract: Contract) {
     }
 }
 
-function* setMessage(action: ReturnType<typeof changeMessage>) {
+function* setMessage(
+    action: ReturnType<typeof changeMessage>,
+): Generator<
+    SelectEffect | Promise<string> | PutEffect | Promise<ContractReceipt>,
+    void,
+    (Contract | undefined) & string & ContractTransaction & ContractReceipt
+> {
     try {
-        const contract = yield select(getMessageContract);
+        const contract: Contract = yield select(getMessageContract);
         const result: ContractTransaction = yield contract.setFreedMessage(action.payload);
 
         const { status } = yield result.wait();
@@ -84,7 +120,7 @@ function* setMessage(action: ReturnType<typeof changeMessage>) {
     }
 }
 
-function* getMessage() {
+function* getMessage(): Generator<SelectEffect | Promise<string> | PutEffect, void, (Contract | undefined) & string> {
     try {
         const contract = yield select(getMessageContract);
 
@@ -95,7 +131,7 @@ function* getMessage() {
     }
 }
 
-function* messageProviderSagaWatcher() {
+function* messageProviderSagaWatcher(): Generator {
     yield all([
         takeEvery(changeMessage, setMessage),
         takeEvery(connectProviderSuccess, initContract),
