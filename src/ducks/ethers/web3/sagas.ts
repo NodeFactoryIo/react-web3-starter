@@ -4,14 +4,14 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3Modal from 'web3modal';
 
 import {
-    connectProvider,
-    connectProviderFail,
-    connectProviderSuccess,
-    getUserInfoInConsole,
-    setProvider,
+    connectWeb3Provider,
+    connectWeb3ProviderFail,
+    connectWeb3ProviderSuccess,
+    getWeb3UserInfoInConsole,
+    setWeb3Provider,
 } from './actions';
-import { getEthersProvider } from './selectors';
-import { ProviderState } from './slice';
+import { getEthersWeb3Provider } from './selectors';
+import { Web3ProviderState } from './slice';
 import { ExternalProvider } from '@ethersproject/providers/lib/web3-provider';
 
 // example for web3modal
@@ -31,29 +31,29 @@ function* connect(): Generator<CallEffect | PutEffect, void, ExternalProvider & 
         const connect = yield call(web3Modal.connect);
         const provider = new providers.Web3Provider(connect);
 
-        yield put(setProvider(provider));
+        yield put(setWeb3Provider(provider));
 
         const [myAddress, balance] = yield call(getSignerBalancer);
         console.log('getSignerBalancer from connect', myAddress, balance);
 
-        yield put(connectProviderSuccess());
+        yield put(connectWeb3ProviderSuccess());
     } catch (e) {
         console.error(e);
-        yield put(connectProviderFail());
+        yield put(connectWeb3ProviderFail());
     }
 }
 
-// example of provider usage
+// example of web3 usage
 function* getSignerBalancer(): Generator<
     Promise<string> | Promise<BigNumber> | SelectEffect,
     void | [string, string],
-    ProviderState & string & BigNumber
+    Web3ProviderState & string & BigNumber
 > {
     try {
-        const provider: ProviderState = yield select(getEthersProvider);
+        const provider: Web3ProviderState = yield select(getEthersWeb3Provider);
 
         if (provider === null) {
-            throw new Error('Missing provider, ensure user provider is connected before');
+            throw new Error('Missing web3, ensure user web3 is connected before');
         }
         const signer = provider.getSigner();
         const myAddress: string = yield signer.getAddress();
@@ -68,7 +68,7 @@ function* getSignerBalancer(): Generator<
 }
 
 function* ethersProviderSagaWatcher(): Generator {
-    yield all([takeEvery(connectProvider, connect), takeEvery(getUserInfoInConsole, getSignerBalancer)]);
+    yield all([takeEvery(connectWeb3Provider, connect), takeEvery(getWeb3UserInfoInConsole, getSignerBalancer)]);
 }
 
 export default ethersProviderSagaWatcher;

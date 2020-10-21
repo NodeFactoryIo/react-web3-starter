@@ -13,16 +13,16 @@ import {
 } from 'redux-saga/effects';
 import { EventChannel } from '@redux-saga/core';
 import { addLogMessage, changeMessage, fetchMessage, setLogMessages, setMessage as setStoreMessage } from './actions';
-import { getEthersProvider } from '../ethers/provider/selectors';
+import { getEthersWeb3Provider } from '../ethers/web3/selectors';
 import { Contract, ContractReceipt, ContractTransaction, utils } from 'ethers';
 import messageAbi from './abi';
 import { storeContract } from '../ethers/contracts/actions';
-import { connectProviderSuccess } from '../ethers/provider/actions';
+import { connectWeb3ProviderSuccess } from '../ethers/web3/actions';
 import { getMessageContract } from './selectors';
 import { eventChannel } from 'redux-saga';
 import { LogMessage } from './slice';
 import { Listener } from '@ethersproject/abstract-provider';
-import { ProviderState } from '../ethers/provider/slice';
+import { Web3ProviderState } from '../ethers/web3/slice';
 import { Await } from '../../types/helpers';
 import { ChannelTakeEffect } from '@redux-saga/core/effects';
 
@@ -34,10 +34,10 @@ type ContractLog = Await<ReturnType<Contract['provider']['getLogs']>>;
 export function* initContract(): Generator<
     SelectEffect | PutEffect | CallEffect | Promise<ContractLog> | ForkEffect,
     void,
-    ProviderState & ContractLog
+    Web3ProviderState & ContractLog
 > {
     try {
-        const provider = yield select(getEthersProvider);
+        const provider = yield select(getEthersWeb3Provider);
         const contract = new Contract(ADDRESS, messageAbi, provider.getSigner());
 
         yield put(storeContract('message', contract));
@@ -134,7 +134,7 @@ function* getMessage(): Generator<SelectEffect | Promise<string> | PutEffect, vo
 function* messageProviderSagaWatcher(): Generator {
     yield all([
         takeEvery(changeMessage, setMessage),
-        takeEvery(connectProviderSuccess, initContract),
+        takeEvery(connectWeb3ProviderSuccess, initContract),
         takeEvery(fetchMessage, getMessage),
     ]);
 }

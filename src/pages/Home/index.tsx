@@ -2,15 +2,15 @@ import { Logo } from '../../components/Logo';
 import React, { FC, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { connectProvider, getUserInfoInConsole } from '../../ducks/ethers/provider/actions';
-import { getEthersProvider } from '../../ducks/ethers/provider/selectors';
+import { connectWeb3Provider, getWeb3UserInfoInConsole } from '../../ducks/ethers/web3/actions';
+import { getEthersWeb3Provider } from '../../ducks/ethers/web3/selectors';
 import { changeMessage } from '../../ducks/message/actions';
 import { getMessage, getMessageLog } from '../../ducks/message/selectors';
 
 export const HomePage: FC = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const provider = useSelector(getEthersProvider);
+    const provider = useSelector(getEthersWeb3Provider);
     const message = useSelector(getMessage);
     const log = useSelector(getMessageLog);
 
@@ -31,14 +31,14 @@ export const HomePage: FC = () => {
                 {!provider && (
                     <button
                         onClick={(): void => {
-                            dispatch(connectProvider());
+                            dispatch(connectWeb3Provider());
                         }}>
                         open web3 modal
                     </button>
                 )}
                 <button
                     onClick={(): void => {
-                        dispatch(getUserInfoInConsole());
+                        dispatch(getWeb3UserInfoInConsole());
                     }}>
                     get user info in console
                 </button>
