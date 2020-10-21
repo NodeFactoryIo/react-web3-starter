@@ -33,8 +33,8 @@ function* connect(): Generator<CallEffect | PutEffect, void, ExternalProvider & 
 
         yield put(setWeb3Provider(provider));
 
-        const [myAddress, balance] = yield call(getSignerBalancer);
-        console.log('getSignerBalancer from connect', myAddress, balance);
+        const [myAddress, balance] = yield call(getSignerBalance);
+        console.log('getSignerBalance from connect', myAddress, balance);
 
         yield put(connectWeb3ProviderSuccess());
     } catch (e) {
@@ -44,7 +44,7 @@ function* connect(): Generator<CallEffect | PutEffect, void, ExternalProvider & 
 }
 
 // example of web3 usage
-function* getSignerBalancer(): Generator<
+function* getSignerBalance(): Generator<
     Promise<string> | Promise<BigNumber> | SelectEffect,
     void | [string, string],
     Web3ProviderState & string & BigNumber
@@ -59,7 +59,7 @@ function* getSignerBalancer(): Generator<
         const myAddress: string = yield signer.getAddress();
         const balance = utils.formatEther(yield provider.getBalance(myAddress));
 
-        console.log('getSignerBalancer', myAddress, balance);
+        console.log('getSignerBalance', myAddress, balance);
 
         return [myAddress, balance] as [string, string];
     } catch (e) {
@@ -68,7 +68,7 @@ function* getSignerBalancer(): Generator<
 }
 
 function* ethersWeb3SagaWatcher(): Generator {
-    yield all([takeEvery(connectWeb3Provider, connect), takeEvery(getWeb3UserInfoInConsole, getSignerBalancer)]);
+    yield all([takeEvery(connectWeb3Provider, connect), takeEvery(getWeb3UserInfoInConsole, getSignerBalance)]);
 }
 
 export default ethersWeb3SagaWatcher;
