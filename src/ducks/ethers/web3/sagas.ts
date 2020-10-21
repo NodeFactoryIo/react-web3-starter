@@ -61,7 +61,7 @@ function* getSignerBalancer(): Generator<
 
         console.log('getSignerBalancer', myAddress, balance);
 
-        return [myAddress, balance];
+        return [myAddress, balance] as [string, string];
     } catch (e) {
         console.error(e);
     }
