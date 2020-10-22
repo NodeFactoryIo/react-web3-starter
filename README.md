@@ -1,3 +1,40 @@
+![NodeFactory](banner.png)
+
+# React Web3 Starter
+
+## Requirements
+
+Following software is required to be installed to use this repo:
+ * [NodeJs](https://nodejs.org/en/) >= v12
+ * [Yarn](https://yarnpkg.com/en/docs/install#debian-stable)
+ * Text editor
+
+## Usage  
+
+- `yarn install` - will run and configure everything for you
+
+#### Development  
+
+ - `yarn start` - runs the app in the development mode @ [http://localhost:3000](http://localhost:3000)
+ - `yarn storybook` - runs component documentation in the development mode @ [http://localhost:6006/](http://localhost:6006/)
+
+#### Tools
+
+ - `yarn lint`
+ - `yarn lint:types`
+ - `yarn lint:fix`
+ - `yarn i18n`
+ - `yarn test`
+ - `yarn eject`
+
+
+
+#### Production  
+
+ - `yarn build`
+ - `yarn build-storybook`
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
