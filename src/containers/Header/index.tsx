@@ -5,7 +5,7 @@ import { revokeAuthorization } from '../../ducks/auth/actions';
 import { getAuthIsAuthorized } from '../../ducks/auth/selectors';
 import { NavLink } from 'react-router-dom';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const dispatch = useDispatch();
     const isAuthorized = useSelector(getAuthIsAuthorized);
 
@@ -52,5 +52,3 @@ const Header: React.FC = () => {
         </header>
     );
 };
-
-export default Header;

@@ -7,7 +7,7 @@ interface PrivateRouteProps extends RouteProps {
     redirectTo: string;
 }
 
-const PrivateRoute: FC<PrivateRouteProps> = ({ children, redirectTo, ...props }) => {
+export const PrivateRoute: FC<PrivateRouteProps> = ({ children, redirectTo, ...props }) => {
     const location = useLocation();
     const isAuthorized = useSelector(getAuthIsAuthorized);
 
@@ -26,5 +26,3 @@ const PrivateRoute: FC<PrivateRouteProps> = ({ children, redirectTo, ...props })
         />
     );
 };
-
-export default PrivateRoute;

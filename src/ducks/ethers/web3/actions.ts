@@ -1,4 +1,4 @@
-import web3Slice from './slice';
+import { web3Slice } from './slice';
 import { createAction } from '@reduxjs/toolkit';
 
 // re-export actions from slice

@@ -6,7 +6,7 @@ export type JsonRpcProviderState = providers.JsonRpcProvider | null;
 // change this with active instance in case of usage
 const initialState: JsonRpcProviderState = null as JsonRpcProviderState;
 
-const jsonRpcSlice = createSlice({
+export const jsonRpcSlice = createSlice({
     name: '@@ethers/jsonRpc',
     initialState,
     reducers: {
@@ -15,5 +15,3 @@ const jsonRpcSlice = createSlice({
         connectJsonRpcProviderFail: (): null => null,
     },
 });
-
-export default jsonRpcSlice;

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import authSlice from './slice';
+import { authSlice } from './slice';
 
 export const { authorizeClient, unauthorizeClient } = authSlice.actions;
 

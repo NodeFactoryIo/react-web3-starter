@@ -3,7 +3,7 @@ import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getAuthIsAuthorized } from '../../ducks/auth/selectors';
 
-const AuthorizationRoute: FC<RouteProps> = ({ children, ...props }) => {
+export const AuthorizationRoute: FC<RouteProps> = ({ children, ...props }) => {
     const location = useLocation<{ from: string }>();
     const isAuthorized = useSelector(getAuthIsAuthorized);
 
@@ -19,5 +19,3 @@ const AuthorizationRoute: FC<RouteProps> = ({ children, ...props }) => {
 
     return children ? <Route {...props}>{children}</Route> : <Route {...props} />;
 };
-
-export default AuthorizationRoute;

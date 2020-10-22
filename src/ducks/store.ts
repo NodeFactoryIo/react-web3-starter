@@ -1,9 +1,9 @@
 import { combineReducers, createStore, applyMiddleware, compose, Store } from 'redux';
 import reduxSaga from 'redux-saga';
-import rootSaga from './rootSaga';
-import ethersReducers from './ethers/reducers';
-import messageSlice from './message/slice';
-import authSlice from './auth/slice';
+import { rootSaga } from './rootSaga';
+import { ethersReducers } from './ethers/reducers';
+import { messageSlice } from './message/slice';
+import { authSlice } from './auth/slice';
 
 // state
 export const rootReducer = combineReducers({
@@ -28,8 +28,6 @@ export const storeCreator = (initialState?: Partial<RootState>): Store<RootState
             ? applyMiddleware(...middleware)
             : composeEnhancers(applyMiddleware(...middleware)),
     );
-const store = storeCreator();
-
-export default store;
+export const store = storeCreator();
 
 sagaMiddleware.run(rootSaga);

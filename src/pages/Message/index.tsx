@@ -6,7 +6,7 @@ import { getEthersWeb3Provider } from '../../ducks/ethers/web3/selectors';
 import { getMessage, getMessageLog } from '../../ducks/message/selectors';
 import { Button } from '../../components/Button';
 
-const Message: FC = () => {
+export const Message: FC = () => {
     const dispatch = useDispatch();
     const provider = useSelector(getEthersWeb3Provider);
     const message = useSelector(getMessage);
@@ -74,5 +74,3 @@ const Message: FC = () => {
         </div>
     );
 };
-
-export default Message;

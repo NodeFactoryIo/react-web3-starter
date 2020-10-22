@@ -1,4 +1,4 @@
-import jsonRpcSlice from './slice';
+import { jsonRpcSlice } from './slice';
 import { createAction } from '@reduxjs/toolkit';
 
 // re-export actions from slice

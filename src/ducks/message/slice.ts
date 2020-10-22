@@ -13,7 +13,7 @@ interface MessageState {
 
 const initialState: MessageState = { message: '', log: [] };
 
-const messageSlice = createSlice({
+export const messageSlice = createSlice({
     name: 'message',
     initialState,
     reducers: {
@@ -33,5 +33,3 @@ const messageSlice = createSlice({
         },
     },
 });
-
-export default messageSlice;

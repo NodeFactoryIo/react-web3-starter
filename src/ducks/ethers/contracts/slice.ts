@@ -7,7 +7,7 @@ interface ContractsState {
 
 const initialState: ContractsState = {};
 
-const contractSlice = createSlice({
+export const contractSlice = createSlice({
     name: '@@ethers/contracts',
     initialState,
     reducers: {
@@ -27,5 +27,3 @@ const contractSlice = createSlice({
         },
     },
 });
-
-export default contractSlice;

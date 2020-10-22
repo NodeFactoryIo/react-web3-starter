@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { requireAuthorization } from '../../ducks/auth/actions';
 import { Button } from '../../components/Button';
 
-const Login: FC = () => {
+export const Login: FC = () => {
     const dispatch = useDispatch();
 
     return (
@@ -20,5 +20,3 @@ const Login: FC = () => {
         </div>
     );
 };
-
-export default Login;

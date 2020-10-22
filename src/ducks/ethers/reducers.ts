@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
-import contractSlice from './contracts/slice';
-import providerSlice from './web3/slice';
-import jsonRpcSlice from './jsonRpc/slice';
+import { contractSlice } from './contracts/slice';
+import { web3Slice } from './web3/slice';
+import { jsonRpcSlice } from './jsonRpc/slice';
 
-const ethersReducers = combineReducers({
-    web3: providerSlice.reducer,
+export const ethersReducers = combineReducers({
+    web3: web3Slice.reducer,
     jsonRpc: jsonRpcSlice.reducer,
     contracts: contractSlice.reducer,
 });
-
-export default ethersReducers;

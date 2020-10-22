@@ -9,8 +9,6 @@ function* deauthorize(): Generator<PutEffect, void> {
     yield put(unauthorizeClient());
 }
 
-function* authSagaWatcher(): Generator {
+export function* authSagaWatcher(): Generator {
     yield all([takeEvery(requireAuthorization, authorize), takeEvery(revokeAuthorization, deauthorize)]);
 }
-
-export default authSagaWatcher;
