@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { requireAuthorization, revokeAuthorization } from '../../ducks/auth/actions';
+import { revokeAuthorization } from '../../ducks/auth/actions';
 import { getAuthIsAuthorized } from '../../ducks/auth/selectors';
+import { NavLink } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();
@@ -25,6 +26,14 @@ const Header: React.FC = () => {
                     <h1>NodeFactory Starter</h1>
                 </div>
                 <div>
+                    <NavLink to='/'>
+                        <Button label='Home' size='small' />
+                    </NavLink>{' '}
+                    <NavLink to='/message'>
+                        <Button label='Messages' size='small' />
+                    </NavLink>
+                </div>
+                <div>
                     {isAuthorized ? (
                         <Button
                             size='small'
@@ -34,13 +43,9 @@ const Header: React.FC = () => {
                             label='Log out'
                         />
                     ) : (
-                        <Button
-                            size='small'
-                            onClick={(): void => {
-                                dispatch(requireAuthorization());
-                            }}
-                            label='Log in'
-                        />
+                        <NavLink to='/login'>
+                            <Button label='Log In' size='small' />
+                        </NavLink>
                     )}
                 </div>
             </div>
