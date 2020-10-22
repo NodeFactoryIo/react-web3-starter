@@ -1,12 +1,12 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import Header from './index';
+import { Header } from './index';
 import './index.scss';
 import { Provider } from 'react-redux';
 import { storeCreator } from '../../ducks/store';
 import { BrowserRouter } from 'react-router-dom';
-import authSlice from '../../ducks/auth/slice';
+import { authSlice } from '../../ducks/auth/slice';
 
 export default {
     title: 'Core/Header',
