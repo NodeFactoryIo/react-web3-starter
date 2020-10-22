@@ -3,17 +3,33 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Header from './index';
 import './index.scss';
+import { Provider } from 'react-redux';
+import { storeCreator } from '../../ducks/store';
+import { BrowserRouter } from 'react-router-dom';
+import authSlice from '../../ducks/auth/slice';
 
 export default {
     title: 'Core/Header',
     component: Header,
 } as Meta;
 
-const Template: Story = () => <Header />;
+interface HeaderTemplateArguments {
+    auth?: ReturnType<typeof authSlice.reducer>;
+}
+
+const Template: Story<HeaderTemplateArguments> = ({ auth }) => {
+    return (
+        <BrowserRouter>
+            <Provider store={storeCreator({ auth })}>
+                <Header />
+            </Provider>
+        </BrowserRouter>
+    );
+};
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-    user: {},
+    auth: { isAuthorized: true },
 };
 
 export const LoggedOut = Template.bind({});
