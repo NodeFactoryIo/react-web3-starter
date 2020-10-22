@@ -3,9 +3,11 @@ import reduxSaga from 'redux-saga';
 import rootSaga from './rootSaga';
 import ethersReducers from './ethers/reducers';
 import messageSlice from './message/slice';
+import authSlice from './auth/slice';
 
 // state
 export const rootReducer = combineReducers({
+    auth: authSlice.reducer,
     ethers: ethersReducers,
     message: messageSlice.reducer,
 });
