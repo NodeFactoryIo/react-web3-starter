@@ -7,6 +7,8 @@ import store from '../ducks/store';
 import Header from '../containers/Header';
 import Message from './Message';
 import Login from './Login';
+import PrivateRoute from '../containers/routes/PrivateRoute';
+import AuthorizationRoute from '../containers/routes/AuthorizationRoute';
 
 const App: FC = () => {
     return (
@@ -15,9 +17,15 @@ const App: FC = () => {
                 <Provider store={store}>
                     <Header />
                     <Switch>
-                        <Route exact path='/' component={HomePage} />
-                        <Route path='/message' component={Message} />
-                        <Route path='/login' component={Login} />
+                        <Route exact path='/'>
+                            <HomePage />
+                        </Route>
+                        <PrivateRoute path='/message' redirectTo='/login'>
+                            <Message />
+                        </PrivateRoute>
+                        <AuthorizationRoute path='/login'>
+                            <Login />
+                        </AuthorizationRoute>
                     </Switch>
                 </Provider>
             </BrowserRouter>
