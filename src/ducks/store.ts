@@ -4,6 +4,7 @@ import { rootSaga } from './rootSaga';
 import { ethersReducers } from './ethers/reducers';
 import { messageSlice } from './message/slice';
 import { authSlice } from './auth/slice';
+import { createAction } from '@reduxjs/toolkit';
 
 // state
 export const rootReducer = combineReducers({
@@ -29,5 +30,9 @@ export const storeCreator = (initialState?: Partial<RootState>): Store<RootState
             : composeEnhancers(applyMiddleware(...middleware)),
     );
 export const store = storeCreator();
+
+// special action - sagas can hook on it to make special actions required for app (can be async)
+export const postInit = createAction('@@POST_INIT');
+store.dispatch(postInit());
 
 sagaMiddleware.run(rootSaga);
