@@ -1,20 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface AuthState {
-    isAuthorized: boolean;
+export enum AuthState {
+    INITIALIZATION = 'initialization',
+    AUTHORIZED = 'authorized',
+    GUEST = 'guest',
 }
 
-const initialState: AuthState = { isAuthorized: false };
+interface AuthReducerState {
+    state: AuthState;
+}
+
+const initialState: AuthReducerState = { state: AuthState.INITIALIZATION };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        authorizeClient: (state): void => {
-            state.isAuthorized = true;
-        },
-        unauthorizeClient: (state): void => {
-            state.isAuthorized = false;
+        setAuthorizeState: (state, action: PayloadAction<AuthState>): void => {
+            state.state = action.payload;
         },
     },
 });

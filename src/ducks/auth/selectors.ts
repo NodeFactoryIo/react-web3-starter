@@ -1,3 +1,4 @@
 import { RootState } from '../store';
+import { AuthState } from './slice';
 
-export const getAuthIsAuthorized = (state: RootState): boolean => state.auth.isAuthorized;
+export const getAuthState = (state: RootState): AuthState => state.auth.state;

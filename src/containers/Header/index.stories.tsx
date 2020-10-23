@@ -6,7 +6,7 @@ import './index.scss';
 import { Provider } from 'react-redux';
 import { storeCreator } from '../../ducks/store';
 import { BrowserRouter } from 'react-router-dom';
-import { authSlice } from '../../ducks/auth/slice';
+import { authSlice, AuthState } from '../../ducks/auth/slice';
 
 export default {
     title: 'Core/Header',
@@ -29,7 +29,7 @@ const Template: Story<HeaderTemplateArguments> = ({ auth }) => {
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-    auth: { isAuthorized: true },
+    auth: { state: AuthState.AUTHORIZED },
 };
 
 export const LoggedOut = Template.bind({});
