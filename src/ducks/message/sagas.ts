@@ -15,7 +15,7 @@ import { EventChannel } from '@redux-saga/core';
 import { addLogMessage, changeMessage, fetchMessage, setLogMessages, setMessage as setStoreMessage } from './actions';
 import { getEthersWeb3Provider } from '../ethers/web3/selectors';
 import { Contract, ContractReceipt, ContractTransaction, utils } from 'ethers';
-import messageAbi from './abi';
+import { messageAbi } from './abi';
 import { storeContract } from '../ethers/contracts/actions';
 import { connectWeb3ProviderSuccess } from '../ethers/web3/actions';
 import { getMessageContract } from './selectors';
@@ -131,12 +131,10 @@ function* getMessage(): Generator<SelectEffect | Promise<string> | PutEffect, vo
     }
 }
 
-function* messageProviderSagaWatcher(): Generator {
+export function* messageSagaWatcher(): Generator {
     yield all([
         takeEvery(changeMessage, setMessage),
         takeEvery(connectWeb3ProviderSuccess, initContract),
         takeEvery(fetchMessage, getMessage),
     ]);
 }
-
-export default messageProviderSagaWatcher;

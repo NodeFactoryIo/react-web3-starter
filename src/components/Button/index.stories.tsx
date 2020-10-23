@@ -3,6 +3,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { Button, ButtonProps } from './index';
+import './index.scss';
 
 export default {
     title: 'Core/Button',

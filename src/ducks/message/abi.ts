@@ -1,4 +1,4 @@
-const messageAbi = [
+export const messageAbi = [
     {
         constant: true,
         inputs: [],
@@ -126,5 +126,3 @@ const messageAbi = [
         type: 'event',
     },
 ];
-
-export default messageAbi;

@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.scss';
 
 export interface ButtonProps {
     /**
@@ -30,7 +29,7 @@ export interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
     primary = false,
     size = 'medium',
-    backgroundColor,
+    backgroundColor = 'white',
     label,
     ...props
 }) => {

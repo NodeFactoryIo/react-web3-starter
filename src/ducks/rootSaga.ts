@@ -1,9 +1,8 @@
 import { all } from 'redux-saga/effects';
-import ethersSagas from './ethers/sagas';
-import messageProviderSagaWatcher from './message/sagas';
+import { ethersSagas } from './ethers/sagas';
+import { messageSagaWatcher } from './message/sagas';
+import { authSagaWatcher } from './auth/sagas';
 
-function* rootSaga(): Generator {
-    yield all([ethersSagas(), messageProviderSagaWatcher()]);
+export function* rootSaga(): Generator {
+    yield all([ethersSagas(), messageSagaWatcher(), authSagaWatcher()]);
 }
-
-export default rootSaga;
