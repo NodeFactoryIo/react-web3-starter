@@ -29,7 +29,7 @@ const Template: Story<HeaderTemplateArguments> = ({ auth }) => {
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-    auth: { state: AuthState.AUTHORIZED },
+    auth: { state: AuthState.AUTHORIZED, roles: [], token: 'fake', name: '', surname: '' },
 };
 
 export const LoggedOut = Template.bind({});

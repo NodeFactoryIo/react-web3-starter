@@ -1,5 +1,11 @@
 import { all, takeEvery, put, PutEffect, call, CallEffect, spawn, ForkEffect, delay } from 'redux-saga/effects';
-import { setAuthorizeState, requireAuthorization, revokeAuthorization } from './actions';
+import {
+    setAuthorizeState,
+    requireAuthorization,
+    revokeAuthorization,
+    storeAuthorization,
+    removeAuthorization,
+} from './actions';
 import { postInit } from '../store';
 import { AuthState } from './slice';
 import { loginUser } from '../../services/auth';
@@ -14,7 +20,7 @@ function* processToken(token: string): Generator<PutEffect | CallEffect, void, v
     const tokenTimeLeft = (decoded.exp - 10) * 1000 - Date.now();
     if (tokenTimeLeft > 0) {
         yield call(setAuthorizationToken, token);
-        yield put(setAuthorizeState(AuthState.AUTHORIZED));
+        yield put(storeAuthorization(token, decoded.role, decoded.name, decoded.surname));
         yield delay(2 * 60 * 1000); // TODO: change this with tokenTimeLeft
         yield call(deauthorize); // you can change this with some refresh token saga
     } else {
@@ -53,7 +59,7 @@ function* deauthorize(): Generator<PutEffect, void> {
     } catch {
         console.error('Unable to remove token from localStorage');
     }
-    yield put(setAuthorizeState(AuthState.GUEST));
+    yield put(removeAuthorization());
 }
 
 export function* authSagaWatcher(): Generator {
