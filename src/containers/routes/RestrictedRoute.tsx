@@ -20,5 +20,6 @@ export const RestrictedRouteRoute: FC<RestrictedRouteRouteProps> = ({ children, 
         }
 
         return null;
-    }, [roles, authRoles]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [roles, authRoles, blocked]);
 };
