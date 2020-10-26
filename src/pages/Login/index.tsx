@@ -12,7 +12,7 @@ export const Login: FC = () => {
                 <Button
                     size='small'
                     onClick={(): void => {
-                        dispatch(requireAuthorization());
+                        dispatch(requireAuthorization('fakeUser', 'fakePassword'));
                     }}
                     label='Log in'
                 />
