@@ -33,6 +33,7 @@ export const store = storeCreator();
 
 // special action - sagas can hook on it to make special actions required for app (can be async)
 export const postInit = createAction('@@POST_INIT');
-store.dispatch(postInit());
 
 sagaMiddleware.run(rootSaga);
+
+store.dispatch(postInit());
