@@ -8,7 +8,7 @@ export const AuthorizationRoute: FC<RouteProps> = ({ children, ...props }) => {
     const location = useLocation<{ from: string }>();
     const authState = useSelector(getAuthState);
 
-    if (authState === AuthState.GUEST) {
+    if (authState === AuthState.AUTHORIZED) {
         return (
             <Redirect
                 to={{
