@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { authSlice } from './slice';
 
-export const { setAuthorizeState, storeAuthorization, removeAuthorization } = authSlice.actions;
+export const { setAuthorizeState, storeAuthorization, removeAuthorization, addAuthorizationRole } = authSlice.actions;
 
 type RequireAuthorization = (username: string, password: string) => { payload: { username: string; password: string } };
 export const requireAuthorization = createAction<RequireAuthorization>(

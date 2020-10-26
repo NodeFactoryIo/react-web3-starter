@@ -36,6 +36,9 @@ export const authSlice = createSlice({
         setAuthorizeState: (state, action: PayloadAction<AuthState>): void => {
             state.state = action.payload;
         },
+        addAuthorizationRole: (state, action: PayloadAction<string>): void => {
+            state.roles.push(action.payload);
+        },
         storeAuthorization: {
             reducer: (state, action: PayloadAction<StoreAuthorizationPayload>): void => {
                 state.state = AuthState.AUTHORIZED;
