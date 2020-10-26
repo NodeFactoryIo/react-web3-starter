@@ -2,14 +2,12 @@ import React, { FC, useState } from 'react';
 import { connectWeb3Provider, getWeb3UserInfoInConsole } from '../../ducks/ethers/web3/actions';
 import { changeMessage } from '../../ducks/message/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEthersWeb3Provider } from '../../ducks/ethers/web3/selectors';
 import { getMessage, getMessageLog } from '../../ducks/message/selectors';
 import { Button } from '../../components/Button';
 import { RestrictedRouteRoute } from '../../containers/routes/RestrictedRoute';
 
 export const Message: FC = () => {
     const dispatch = useDispatch();
-    const provider = useSelector(getEthersWeb3Provider);
     const message = useSelector(getMessage);
     const log = useSelector(getMessageLog);
 
