@@ -4,7 +4,7 @@ import { changeMessage } from '../../ducks/message/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessage, getMessageLog } from '../../ducks/message/selectors';
 import { Button } from '../../components/Button';
-import { RestrictedRouteRoute } from '../../containers/routes/RestrictedRoute';
+import { RestrictedView } from '../../containers/views/RestrictedView';
 
 export const MessagePage: FC = () => {
     const dispatch = useDispatch();
@@ -16,15 +16,15 @@ export const MessagePage: FC = () => {
     return (
         <div className='App'>
             <header className='App-header'>
-                <RestrictedRouteRoute roles={['user']} blocked={['web3']}>
+                <RestrictedView roles={['user']} blockedRoles={['web3']}>
                     <Button
                         onClick={(): void => {
                             dispatch(connectWeb3Provider());
                         }}
                         label='open web3 modal'
                     />
-                </RestrictedRouteRoute>
-                <RestrictedRouteRoute roles={['web3']}>
+                </RestrictedView>
+                <RestrictedView roles={['web3']}>
                     <Button
                         onClick={(): void => {
                             dispatch(getWeb3UserInfoInConsole());
@@ -66,7 +66,7 @@ export const MessagePage: FC = () => {
                             ))}
                         </tbody>
                     </table>
-                </RestrictedRouteRoute>
+                </RestrictedView>
             </header>
         </div>
     );
