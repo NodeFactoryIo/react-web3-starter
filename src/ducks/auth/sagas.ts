@@ -42,9 +42,9 @@ function* initialization(): Generator<PutEffect | ForkEffect, void, void> {
 }
 
 function* authorize({
-    payload: { username, password },
+    payload: { email, password },
 }: ReturnType<typeof requireAuthorization>): Generator<ForkEffect | CallEffect, void, string> {
-    const token = yield call(loginUser, username, password);
+    const token = yield call(loginUser, email, password);
     try {
         localStorage.setItem(AUTH_STORAGE_KEY, token);
     } catch {
