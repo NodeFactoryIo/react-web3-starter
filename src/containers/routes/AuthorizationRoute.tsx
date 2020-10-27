@@ -5,18 +5,18 @@ import { getAuthState } from '../../ducks/auth/selectors';
 import { AuthState } from '../../ducks/auth/slice';
 
 export const AuthorizationRoute: FC<RouteProps> = ({ children, ...props }) => {
-    const location = useLocation<{ from: string }>();
-    const authState = useSelector(getAuthState);
+  const location = useLocation<{ from: string }>();
+  const authState = useSelector(getAuthState);
 
-    if (authState === AuthState.AUTHORIZED) {
-        return (
-            <Redirect
-                to={{
-                    pathname: location.state?.from || '/',
-                }}
-            />
-        );
-    }
+  if (authState === AuthState.AUTHORIZED) {
+    return (
+      <Redirect
+        to={{
+          pathname: location.state?.from || '/',
+        }}
+      />
+    );
+  }
 
-    return <Route {...props}>{children}</Route>;
+  return <Route {...props}>{children}</Route>;
 };

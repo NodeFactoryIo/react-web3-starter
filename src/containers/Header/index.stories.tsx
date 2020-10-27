@@ -9,27 +9,27 @@ import { BrowserRouter } from 'react-router-dom';
 import { authSlice, AuthState } from '../../ducks/auth/slice';
 
 export default {
-    title: 'Core/Header',
-    component: Header,
+  title: 'Core/Header',
+  component: Header,
 } as Meta;
 
 interface HeaderTemplateArguments {
-    auth?: ReturnType<typeof authSlice.reducer>;
+  auth?: ReturnType<typeof authSlice.reducer>;
 }
 
 const Template: Story<HeaderTemplateArguments> = ({ auth }) => {
-    return (
-        <BrowserRouter>
-            <Provider store={storeCreator({ auth })}>
-                <Header />
-            </Provider>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Provider store={storeCreator({ auth })}>
+        <Header />
+      </Provider>
+    </BrowserRouter>
+  );
 };
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-    auth: { state: AuthState.AUTHORIZED, roles: [], token: 'fake', name: '', surname: '' },
+  auth: { state: AuthState.AUTHORIZED, roles: [], token: 'fake', name: '', surname: '' },
 };
 
 export const LoggedOut = Template.bind({});
