@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Structure" />
+
+# hello
+
+## Table of content
+- [Project structure](#structure)
+  - [Ducks](#ducks)
+- [Documentation](#documentation)
+
+## Project structure
+<a name="structure"/>
+
+### assets
+Place for assets used in application
+
+### components & containers
+Shared react components
+
+### pages
+Represents routing's
+
+### Ducks
+<a name="ducks"/>
+
+Redux store inspired by ducks proposal on [gitHub](https://github.com/erikras/ducks-modular-redux)
+
+Tools used to for business logic and data flow
+- [Redux-Saga](https://redux-saga.js.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+
+Structure clarification
+- **`store.ts`** - root place of redux store containing `rootReducer`, `middleware`'s, `enhancer`'s and `storeCreator` for Redux Provider
+- **`rootSaga.ts`** - entry point for `sagaMiddleware.run()` (like `rootReducer` but for sagas, see [Beginner Tutorial](https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html) for additional clarification)
+- **`folder`** - there is `2` type of folders, `combiner` and `store` folder
+  - **`combiner folder`** - can only contain `reducers.ts`, `sagas.ts` and `store folders` and his primary function is to bundle `"store's"`
+    - **`reducers.ts`** - similar as `rootReducer` contains `combineReducers()` for sub `store`'s
+    - **`sagas.ts`** - similar as `rootSaga` contains all sagas from sub folders
+  - **`store folder`** - can contain `reducers`, `actions`, `sagas` and `selectors` _(in any file you like)_ but cannot contain `folders`
+
+### services
+Responsible to communicate with outside world
+
+## Documentation
+<a name="documentation"/>
