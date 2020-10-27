@@ -21,7 +21,7 @@ function* processToken(token: string): Generator<PutEffect | CallEffect, void, v
     if (tokenTimeLeft > 0) {
         yield call(setAuthorizationToken, token);
         yield put(storeAuthorization(token, decoded.role, decoded.name, decoded.surname));
-        yield delay(2 * 60 * 1000); // TODO: change this with tokenTimeLeft
+        yield delay(tokenTimeLeft);
         yield call(deauthorize); // you can change this with some refresh token saga
     } else {
         yield call(deauthorize);
