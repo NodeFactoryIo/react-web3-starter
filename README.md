@@ -2,7 +2,7 @@
 
 # React Web3 Starter  
 
-Starter repository for developing reach front-end apps.  
+Starter repository for developing React front-end apps.  
 Bootstrapped with [Create React App](https://github.com/facebook/create-react-app) with addition of own flavor's to reduce initial boilerplate and solve common problems.  
 
 ## Requirements  
@@ -10,7 +10,6 @@ Bootstrapped with [Create React App](https://github.com/facebook/create-react-ap
 Following software is required to be installed to use this repo:  
  * [NodeJs](https://nodejs.org/en/) >= v12  
  * [Yarn](https://yarnpkg.com/en/docs/install#debian-stable)  
- * Text editor  
 
 ## Usage  
 
