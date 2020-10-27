@@ -13,7 +13,7 @@ export const PrivateRoute: FC<PrivateRouteProps> = ({ children, redirectTo, ...p
     const authState = useSelector(getAuthState);
 
     if (authState === AuthState.AUTHORIZED) {
-        return children ? <Route {...props}>{children}</Route> : <Route {...props} />;
+        return <Route {...props}>{children}</Route>;
     }
 
     if (authState === AuthState.INITIALIZATION) {

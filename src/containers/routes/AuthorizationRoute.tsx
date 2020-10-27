@@ -18,5 +18,5 @@ export const AuthorizationRoute: FC<RouteProps> = ({ children, ...props }) => {
         );
     }
 
-    return children ? <Route {...props}>{children}</Route> : <Route {...props} />;
+    return <Route {...props}>{children}</Route>;
 };

@@ -16,7 +16,7 @@ export const RestrictedRouteRoute: FC<RestrictedRouteRouteProps> = ({ children, 
             roles.some((role) => authRoles.some((authRole) => role === authRole)) &&
             !blocked.some((role) => authRoles.some((authRole) => role === authRole))
         ) {
-            return children ? <Route {...props}>{children}</Route> : <Route {...props} />;
+            return <Route {...props}>{children}</Route>;
         }
 
         return null;
