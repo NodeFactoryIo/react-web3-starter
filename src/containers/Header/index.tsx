@@ -2,12 +2,13 @@ import React from 'react';
 import { Button } from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { revokeAuthorization } from '../../ducks/auth/actions';
-import { getAuthIsAuthorized } from '../../ducks/auth/selectors';
+import { getAuthState } from '../../ducks/auth/selectors';
 import { NavLink } from 'react-router-dom';
+import { AuthState } from '../../ducks/auth/slice';
 
 export const Header: React.FC = () => {
     const dispatch = useDispatch();
-    const isAuthorized = useSelector(getAuthIsAuthorized);
+    const authState = useSelector(getAuthState);
 
     return (
         <header>
@@ -34,7 +35,7 @@ export const Header: React.FC = () => {
                     </NavLink>
                 </div>
                 <div>
-                    {isAuthorized ? (
+                    {authState === AuthState.AUTHORIZED ? (
                         <Button
                             size='small'
                             onClick={(): void => {

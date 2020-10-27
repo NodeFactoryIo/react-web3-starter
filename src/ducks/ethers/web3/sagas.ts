@@ -13,6 +13,7 @@ import {
 import { getEthersWeb3Provider } from './selectors';
 import { Web3ProviderState } from './slice';
 import { ExternalProvider } from '@ethersproject/providers/lib/web3-provider';
+import { addAuthorizationRole } from '../../auth/actions';
 
 // example for web3modal
 const providerOptions = {
@@ -32,6 +33,7 @@ function* connect(): Generator<CallEffect | PutEffect, void, ExternalProvider & 
         const provider = new providers.Web3Provider(connect);
 
         yield put(setWeb3Provider(provider));
+        yield put(addAuthorizationRole('web3'));
 
         const [myAddress, balance] = yield call(getSignerBalance);
         console.log('getSignerBalance from connect', myAddress, balance);

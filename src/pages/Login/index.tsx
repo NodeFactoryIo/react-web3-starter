@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { requireAuthorization } from '../../ducks/auth/actions';
 import { Button } from '../../components/Button';
 
-export const Login: FC = () => {
+export const LoginPage: FC = () => {
     const dispatch = useDispatch();
 
     return (
@@ -12,7 +12,7 @@ export const Login: FC = () => {
                 <Button
                     size='small'
                     onClick={(): void => {
-                        dispatch(requireAuthorization());
+                        dispatch(requireAuthorization('fakeUser', 'fakePassword'));
                     }}
                     label='Log in'
                 />
