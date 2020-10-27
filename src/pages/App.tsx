@@ -5,8 +5,8 @@ import { HomePage } from './Home';
 import { Provider } from 'react-redux';
 import { store } from '../ducks/store';
 import { Header } from '../containers/Header';
-import { Message } from './Message';
-import { Login } from './Login';
+import { MessagePage } from './Message';
+import { LoginPage } from './Login';
 import { PrivateRoute } from '../containers/routes/PrivateRoute';
 import { AuthorizationRoute } from '../containers/routes/AuthorizationRoute';
 
@@ -21,10 +21,10 @@ export const App: FC = () => {
                             <HomePage />
                         </Route>
                         <PrivateRoute path='/message' redirectTo='/login'>
-                            <Message />
+                            <MessagePage />
                         </PrivateRoute>
                         <AuthorizationRoute path='/login'>
-                            <Login />
+                            <LoginPage />
                         </AuthorizationRoute>
                     </Switch>
                 </Provider>

@@ -6,7 +6,7 @@ import { getMessage, getMessageLog } from '../../ducks/message/selectors';
 import { Button } from '../../components/Button';
 import { RestrictedRouteRoute } from '../../containers/routes/RestrictedRoute';
 
-export const Message: FC = () => {
+export const MessagePage: FC = () => {
     const dispatch = useDispatch();
     const message = useSelector(getMessage);
     const log = useSelector(getMessageLog);

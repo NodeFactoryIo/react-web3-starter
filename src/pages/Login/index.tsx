@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { requireAuthorization } from '../../ducks/auth/actions';
 import { Button } from '../../components/Button';
 
-export const Login: FC = () => {
+export const LoginPage: FC = () => {
     const dispatch = useDispatch();
 
     return (
