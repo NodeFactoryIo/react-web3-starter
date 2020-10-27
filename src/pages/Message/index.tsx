@@ -7,67 +7,67 @@ import { Button } from '../../components/Button';
 import { RestrictedView } from '../../containers/views/RestrictedView';
 
 export const MessagePage: FC = () => {
-    const dispatch = useDispatch();
-    const message = useSelector(getMessage);
-    const log = useSelector(getMessageLog);
+  const dispatch = useDispatch();
+  const message = useSelector(getMessage);
+  const log = useSelector(getMessageLog);
 
-    const [inputMessage, setMessage] = useState('');
+  const [inputMessage, setMessage] = useState('');
 
-    return (
-        <div className='App'>
-            <header className='App-header'>
-                <RestrictedView roles={['user']} blockedRoles={['web3']}>
-                    <Button
-                        onClick={(): void => {
-                            dispatch(connectWeb3Provider());
-                        }}
-                        label='open web3 modal'
-                    />
-                </RestrictedView>
-                <RestrictedView roles={['web3']}>
-                    <Button
-                        onClick={(): void => {
-                            dispatch(getWeb3UserInfoInConsole());
-                        }}
-                        label='get user info in console'
-                    />
-                    <h2>{message}</h2>
-                    <div>
-                        <input
-                            value={inputMessage}
-                            onChange={(e): void => setMessage(e.target.value)}
-                            placeholder='enter new message'
-                        />
-                        <Button
-                            onClick={(): void => {
-                                if (inputMessage) {
-                                    dispatch(changeMessage(inputMessage));
-                                    setMessage('');
-                                }
-                            }}
-                            label='Send'
-                        />
-                    </div>
-                    <table style={{ width: '80%' }}>
-                        <thead>
-                            <tr>
-                                <td>From</td>
-                                <td>Message</td>
-                                <td>Type</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {[...log].reverse().map(({ sender, setter, message }, index) => (
-                                <tr key={index}>
-                                    <td>{sender}</td>
-                                    <td>{message}</td>
-                                    <td>{setter}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </RestrictedView>
-            </header>
-        </div>
-    );
+  return (
+    <div className="App">
+      <header className="App-header">
+        <RestrictedView roles={['user']} blockedRoles={['web3']}>
+          <Button
+            onClick={(): void => {
+              dispatch(connectWeb3Provider());
+            }}
+            label="open web3 modal"
+          />
+        </RestrictedView>
+        <RestrictedView roles={['web3']}>
+          <Button
+            onClick={(): void => {
+              dispatch(getWeb3UserInfoInConsole());
+            }}
+            label="get user info in console"
+          />
+          <h2>{message}</h2>
+          <div>
+            <input
+              value={inputMessage}
+              onChange={(e): void => setMessage(e.target.value)}
+              placeholder="enter new message"
+            />
+            <Button
+              onClick={(): void => {
+                if (inputMessage) {
+                  dispatch(changeMessage(inputMessage));
+                  setMessage('');
+                }
+              }}
+              label="Send"
+            />
+          </div>
+          <table style={{ width: '80%' }}>
+            <thead>
+              <tr>
+                <td>From</td>
+                <td>Message</td>
+                <td>Type</td>
+              </tr>
+            </thead>
+            <tbody>
+              {[...log].reverse().map(({ sender, setter, message }, index) => (
+                <tr key={index}>
+                  <td>{sender}</td>
+                  <td>{message}</td>
+                  <td>{setter}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </RestrictedView>
+      </header>
+    </div>
+  );
 };

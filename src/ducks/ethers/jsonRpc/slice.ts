@@ -7,11 +7,11 @@ export type JsonRpcProviderState = providers.JsonRpcProvider | null;
 const initialState: JsonRpcProviderState = null as JsonRpcProviderState;
 
 export const jsonRpcSlice = createSlice({
-    name: '@@ethers/jsonRpc',
-    initialState,
-    reducers: {
-        setJsonRpcProvider: (_, action: PayloadAction<providers.JsonRpcProvider>): providers.JsonRpcProvider =>
-            action.payload,
-        connectJsonRpcProviderFail: (): null => null,
-    },
+  name: '@@ethers/jsonRpc',
+  initialState,
+  reducers: {
+    setJsonRpcProvider: (_, action: PayloadAction<providers.JsonRpcProvider>): providers.JsonRpcProvider =>
+      action.payload,
+    connectJsonRpcProviderFail: (): null => null,
+  },
 });

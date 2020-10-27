@@ -5,29 +5,29 @@ import { getAuthState } from '../../ducks/auth/selectors';
 import { AuthState } from '../../ducks/auth/slice';
 
 interface PrivateRouteProps extends RouteProps {
-    redirectTo: string;
+  redirectTo: string;
 }
 
 export const PrivateRoute: FC<PrivateRouteProps> = ({ children, redirectTo, ...props }) => {
-    const location = useLocation();
-    const authState = useSelector(getAuthState);
+  const location = useLocation();
+  const authState = useSelector(getAuthState);
 
-    if (authState === AuthState.AUTHORIZED) {
-        return <Route {...props}>{children}</Route>;
-    }
+  if (authState === AuthState.AUTHORIZED) {
+    return <Route {...props}>{children}</Route>;
+  }
 
-    if (authState === AuthState.INITIALIZATION) {
-        return null;
-    }
+  if (authState === AuthState.INITIALIZATION) {
+    return null;
+  }
 
-    return (
-        <Redirect
-            to={{
-                pathname: redirectTo,
-                state: {
-                    from: location.pathname,
-                },
-            }}
-        />
-    );
+  return (
+    <Redirect
+      to={{
+        pathname: redirectTo,
+        state: {
+          from: location.pathname,
+        },
+      }}
+    />
+  );
 };

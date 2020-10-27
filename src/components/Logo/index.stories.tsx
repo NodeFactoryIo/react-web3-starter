@@ -4,8 +4,8 @@ import { Logo } from '.';
 import './index.scss';
 
 export default {
-    title: 'Core/Logo',
-    component: Logo,
+  title: 'Core/Logo',
+  component: Logo,
 } as Meta;
 
 const Template: Story = () => <Logo />;
