@@ -21,16 +21,20 @@ export const MessagePage: FC = () => {
             onClick={(): void => {
               dispatch(connectWeb3Provider());
             }}
-            label="open web3 modal"
-          />
+            color="primary"
+          >
+            open web3 modal
+          </Button>
         </RestrictedView>
         <RestrictedView roles={['web3']}>
           <Button
             onClick={(): void => {
               dispatch(getWeb3UserInfoInConsole());
             }}
-            label="get user info in console"
-          />
+            color="primary"
+          >
+            get user info in console
+          </Button>
           <h2>{message}</h2>
           <div>
             <input
@@ -45,8 +49,10 @@ export const MessagePage: FC = () => {
                   setMessage('');
                 }
               }}
-              label="Send"
-            />
+              color="primary"
+            >
+              Send
+            </Button>
           </div>
           <table style={{ width: '80%' }}>
             <thead>

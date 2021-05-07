@@ -25,24 +25,25 @@ export const Header: React.FC = () => {
         </div>
         <div>
           <NavLink to="/">
-            <Button label="Home" size="small" />
+            <Button color="primary">Home</Button>
           </NavLink>{' '}
           <NavLink to="/message">
-            <Button label="Messages" size="small" />
+            <Button color="primary">Messages</Button>
           </NavLink>
         </div>
         <div>
           {authState === AuthState.AUTHORIZED ? (
             <Button
-              size="small"
+              color="primary"
               onClick={(): void => {
                 dispatch(revokeAuthorization());
               }}
-              label="Log out"
-            />
+            >
+              Log out
+            </Button>
           ) : (
             <NavLink to="/login">
-              <Button label="Log In" size="small" />
+              <Button color="primary">Log In</Button>
             </NavLink>
           )}
         </div>

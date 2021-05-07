@@ -1,47 +1,16 @@
 import React from 'react';
+import classnames from 'classnames';
 
-export interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
-  label: string;
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void;
+export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  color: 'primary' | 'secondary';
+  //could be defined, depending on the project
+  // size: 'small' | 'medium' | 'large';
 }
 
-/**
- * Primary UI component for user interaction
- */
-export const Button: React.FC<ButtonProps> = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor = 'white',
-  label,
-  ...props
-}) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export const Button: React.FC<IButtonProps> = ({ color, className, ...props }) => {
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
+    <button className={classnames('button', color, className)} {...props}>
+      {props.children}
     </button>
   );
 };
