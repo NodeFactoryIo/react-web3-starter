@@ -10,12 +10,13 @@ export const LoginPage: FC = () => {
     <div className="App">
       <header className="App-header">
         <Button
-          size="small"
+          color="primary"
           onClick={(): void => {
             dispatch(requireAuthorization('fakeUser', 'fakePassword'));
           }}
-          label="Log in"
-        />
+        >
+          Log in
+        </Button>
       </header>
     </div>
   );

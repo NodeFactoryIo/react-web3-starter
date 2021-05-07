@@ -1,0 +1,12 @@
+//adjust for specific project
+$bp-small: 22.5rem; // 360px
+$bp-medium: 35.5rem; // 568px
+$bp-large: 48rem; // 768px
+$bp-xlarge: 62rem; // 992px
+$bp-xxlarge: 90rem; // 1440px
+
+$mq-small: "(min-width: #{$bp-small})";
+$mq-medium: "(min-width: #{$bp-medium})";
+$mq-large: "(min-width: #{$bp-large})";
+$mq-xlarge: "(min-width: #{$bp-xlarge})";
+$mq-xxlarge: "(min-width: #{$bp-xxlarge})";

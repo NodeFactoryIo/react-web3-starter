@@ -1,6 +1,5 @@
 import React, { FC, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.scss';
 import { HomePage } from './Home';
 import { Provider } from 'react-redux';
 import { store } from '../ducks/store';
